@@ -65,6 +65,7 @@ class ListaTutoriaController extends Controller
 
         $Lista_Tutorias = new lista_Tutoria();
         $Lista_Tutorias->Nombre_Lenguaje =  $request->input('Nombre_Lenguaje');
+        $Lista_Tutorias->Descripcion =  $request->input('Descripcion');
         $Lista_Tutorias->ID_Usuario =  1;
         $Lista_Tutorias->Fecha_Creacion =  Carbon::now();
 
@@ -123,5 +124,20 @@ class ListaTutoriaController extends Controller
     public function destroy(Lista_Tutorias $lista_Tutorias)
     {
         //
+    }
+
+    public function listado()
+    {
+        $lista_Tutorias = DB::table('tutorias')
+        ->rightJoin('lista_Tutorias','tutorias.ID_Lista_Tutorias','=','lista_Tutorias.ID_Lista_Tutorias')
+        ->leftJoin('usuarios','lista_Tutorias.ID_Usuario','=','usuarios.ID_Usuario') 
+        ->select(   'lista_Tutorias.Nombre_Lenguaje',
+                    'lista_Tutorias.Descripcion',
+                    'usuarios.Nombre',
+                    'usuarios.Apellido',
+                    'tutorias.Link_video')
+        ->get();
+        $lista_Tutorias = $lista_Tutorias->unique('lista_Tutorias->Nombre_Lenguaje');
+        return view('Home', compact('lista_Tutorias'));
     }
 }

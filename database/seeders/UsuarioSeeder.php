@@ -19,11 +19,29 @@ class UsuarioSeeder extends Seeder
             [
                 'ID_Usuario' => 1,
                 'ID_Rol' => 1,
-                'Nombre' => 'Usuario_test',
-                'Apellido' => 'Usuario_test',
+                'Nombre' => 'admin',
+                'Apellido' => 'admin',
                 'Rut' => '9.999.999-9',
-                'Email' => 'email@test',
-                'Contraseña' => 'Usuariotest',
+                'Email' => 'admin@admin',
+                'Contraseña' => 'admin',
+                'Activo' => true,
+            ],[
+                'ID_Usuario' => 2,
+                'ID_Rol' => 2,
+                'Nombre' => 'tutor',
+                'Apellido' => 'tutor',
+                'Rut' => '9.999.999-9',
+                'Email' => 'tutor@tutor',
+                'Contraseña' => 'tutor',
+                'Activo' => true,
+            ],            [
+                'ID_Usuario' => 3,
+                'ID_Rol' => 3,
+                'Nombre' => 'estudiante',
+                'Apellido' => 'estudiante',
+                'Rut' => '9.999.999-9',
+                'Email' => 'estudiante@estudiante',
+                'Contraseña' => 'estudiante',
                 'Activo' => true,
             ]
         ];

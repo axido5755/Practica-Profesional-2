@@ -17,10 +17,6 @@ Route::get('/Referidos', function () {
     return view('Referidos');
 });
 
-Route::get('/', function () {
-    return view('Home');
-});
-
 Route::get('/Login', function () {
     return view('Login');
 });
@@ -33,3 +29,4 @@ Route::get('/admin', function () {
 Route::resource('Lista_Tutorias', '\App\Http\Controllers\ListaTutoriaController');
 Route::resource('Tutoria', '\App\Http\Controllers\TutoriaController');
 Route::get('/Tutoria/listado/{ID_Lista_Tutorias}', 'App\Http\Controllers\TutoriaController@listado');
+Route::get('/', 'App\Http\Controllers\ListaTutoriaController@listado');

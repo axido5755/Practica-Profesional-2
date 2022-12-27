@@ -8,7 +8,7 @@
             <h1>Listado de tutorias</h1>
     
             <div>
-                <a class="btn btn-primary" href="/Lista_Tutorias/create">Crear curso de tutorias</a>
+                <a class="btn btn-primary" href="/Tutoria/create">Crear tutoria</a>
             </div>
             
             

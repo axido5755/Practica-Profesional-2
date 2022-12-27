@@ -15,6 +15,12 @@
                     <input type="text" class="form-control" name='Nombre_Lenguaje' maxlength="100" minlength="0" >
                 </div>
 
+                {{-- Descripcion --}}
+                <div class="form-group">
+                    <label>Descripcion:</label>
+                    <input type="text" class="form-control" name='Descripcion' maxlength="100" minlength="0" >
+                </div>
+
                 {{-- Autor --}}
                 <div class="form-group">
                     <label>Autor:</label>

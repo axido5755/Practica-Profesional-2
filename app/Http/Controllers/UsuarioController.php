@@ -82,4 +82,29 @@ class UsuarioController extends Controller
     {
         //
     }
+
+    public function login(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required|email',
+            'pass' => 'required',
+        ]);
+
+        $usuario = Usuario::where('Email', $request->email)->first();
+        if (!$usuario || !$usuario->Activo) {
+            return null;
+        }
+        return $usuario;
+    }
+
+    public function cambiarActivo($id){
+        console.log($id);
+        $usuario = Usuario::where('ID_Usuario', $id)->first();
+        if($usuario == null){
+            throw new NotFoundHttpException("usuario no encontrado");
+        }
+        $usuario->Activo = !$usuario->Activo;
+        $usuario->save();
+        return $usuario;
+    }
 }
