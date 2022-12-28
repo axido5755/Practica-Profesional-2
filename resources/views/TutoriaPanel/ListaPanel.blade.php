@@ -7,8 +7,8 @@
 
       <section class="jumbotron text-center">
         <div class="container">
-          <h1 class="jumbotron-heading">Bienvenido al área de tutorías ICINF</h1>
-          <p class="lead text-muted">Bienvenido al portal de Tutorías, espacio de difusión de la labor tutorial que se realiza en la Universidad del BíoBío.</p>
+          <h1 class="jumbotron-heading">Lenguaje: {{$Lista->Nombre_Lenguaje}}</h1>
+          <p class="lead text-muted">{{$Lista->Descripcion}}</p>
         </div>
       </section>
 
@@ -20,12 +20,12 @@
               <div class="card mb-4 box-shadow">
 
 
-                <div class="js-youtube-player youtube-player" data-id="{{$lista_Tutorias->Link_video}}"  data-id2 = "{{$lista_Tutorias->ID_Lista_Tutorias}}"></div>
+                <div class="js-youtube-player youtube-player" data-id="{{$lista_Tutorias->Link_video}}"  data-id2 = "{{$lista_Tutorias->ID_Tutoria}}" data-id3 ="{{$lista_Tutorias->ID_Lista_Tutorias}}"></div>
 
                 
                 <div class="card-body">
-                    <h3>{{$lista_Tutorias->Nombre_Lenguaje}}</h3>
-                  <p class="card-text">{{$lista_Tutorias->Descripcion}}</p>
+                    <h3>Tutoria: {{$lista_Tutorias->Numeracion}}</h3>
+                  <p class="card-text">{{$lista_Tutorias->Titulo}}</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
@@ -54,7 +54,8 @@ function getVideos() {
         var p = document.createElement("div");
         console.log( v[n]);
         const words = v[n].getAttribute("data-id");
-        const ID_Lista_Tutorias = v[n].getAttribute("data-id2");
+        const ID_Tutoria = v[n].getAttribute("data-id2");
+        const ID_Lista_Tutorias = v[n].getAttribute("data-id3");
 
         var id = words.split('=')[1];        
 
@@ -67,8 +68,9 @@ function getVideos() {
 
         v[n].appendChild(p);
         p.addEventListener("click", function () {
-          var url = '{{ url("/Tutorialistado/:slug") }}';
-          url = url.replace(":slug", ID_Lista_Tutorias);
+          var url = '{{ url("/Tutoria/Video/:slug1/:slug2") }}';
+          url = url.replace(":slug1", ID_Tutoria);
+          url = url.replace(":slug2", ID_Lista_Tutorias);
           window.location.href=url;
         });
     }

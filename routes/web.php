@@ -21,6 +21,10 @@ Route::get('/Login', function () {
     return view('Login');
 });
 
+Route::get('/video', function () {
+    return view('TutoriaPanel/Panel');
+});
+
 
 Route::get('/admin', function () {
     return view('layouts/admin');
@@ -29,4 +33,6 @@ Route::get('/admin', function () {
 Route::resource('Lista_Tutorias', '\App\Http\Controllers\ListaTutoriaController');
 Route::resource('Tutoria', '\App\Http\Controllers\TutoriaController');
 Route::get('/Tutoria/listado/{ID_Lista_Tutorias}', 'App\Http\Controllers\TutoriaController@listado');
+Route::get('/Tutorialistado/{ID_Lista_Tutorias}', 'App\Http\Controllers\TutoriaController@listadohome');
 Route::get('/', 'App\Http\Controllers\ListaTutoriaController@listado');
+Route::get('/Tutoria/Video/{ID_Lista}/{ID_Tutoria}', 'App\Http\Controllers\TutoriaController@video');

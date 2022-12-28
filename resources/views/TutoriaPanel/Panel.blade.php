@@ -2,49 +2,27 @@
 
 @section('content')
 
+<div id="instructions">
 
-<main role="main">
+<div class="youtube-container">
+<div class="js-youtube-player youtube-player" data-id="{{$lista_Tutorias->Link_video}}" ></div>
+</div>
 
-      <section class="jumbotron text-center">
-        <div class="container">
-          <h1 class="jumbotron-heading">Bienvenido al área de tutorías ICINF</h1>
-          <p class="lead text-muted">Bienvenido al portal de Tutorías, espacio de difusión de la labor tutorial que se realiza en la Universidad del BíoBío.</p>
-        </div>
-      </section>
+<div class="container-fluid p-4">
+        <!--Bootstrap classes arrange web page components into columns and rows in a grid -->
+        <div class="row justify-content-md-center">
+            <div class="col-md-9">
+                <h3>Tutoria: {{$lista_Tutorias->Numeracion}}</h3>
 
-      <div class="album py-5 bg-light">
-        <div class="container">
-          <div class="row">
-          @foreach ($lista_Tutorias as $lista_Tutorias)
-            <div class="col-md-4">
-              <div class="card mb-4 box-shadow">
+                <div>{!!$lista_Tutorias->Contenido!!}</div>
 
-
-                <div class="js-youtube-player youtube-player" data-id="{{$lista_Tutorias->Link_video}}"  data-id2 = "{{$lista_Tutorias->ID_Lista_Tutorias}}"></div>
-
-                
-                <div class="card-body">
-                    <h3>{{$lista_Tutorias->Nombre_Lenguaje}}</h3>
-                  <p class="card-text">{{$lista_Tutorias->Descripcion}}</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    </div>
-                    <small class="text-muted">9 mins</small>
-                  </div>
-                </div>
-              </div>
             </div>
-            @endforeach
-          </div>
         </div>
-      </div>
+    </div>
 
-    </main>
-
+</div>
+  
 <script>
-
 (function () {
     getVideos();
 })();
@@ -52,10 +30,7 @@ function getVideos() {
     var v = document.getElementsByClassName("youtube-player");
     for (var n = 0; n < v.length; n++) {
         var p = document.createElement("div");
-        console.log( v[n]);
         const words = v[n].getAttribute("data-id");
-        const ID_Lista_Tutorias = v[n].getAttribute("data-id2");
-
         var id = words.split('=')[1];        
 
         var placeholder = v[n].hasAttribute("data-thumbnail")
@@ -67,9 +42,10 @@ function getVideos() {
 
         v[n].appendChild(p);
         p.addEventListener("click", function () {
-          var url = '{{ url("/Tutorialistado/:slug") }}';
-          url = url.replace(":slug", ID_Lista_Tutorias);
-          window.location.href=url;
+            var parent = this.parentNode;
+            const words = parent.getAttribute("data-id");
+            var id = words.split('=')[1];    
+            createIframe(parent, id);
         });
     }
 }
@@ -88,13 +64,35 @@ function createThumbail(id) {
         '/maxresdefault.webp" alt="Youtube Preview"><div class="youtube-play-btn"></div>'
     );
 }
+
+function createIframe(v, id) {
+    var iframe = document.createElement("iframe");
+    console.log("{"+id+"}");
+    iframe.setAttribute(
+        "src",
+        "//www.youtube.com/embed/"+id+"?autoplay=1&color=white&autohide=2&modestbranding=1&border=0&wmode=opaque&enablejsapi=1&showinfo=0&rel=0"
+    );
+    iframe.setAttribute("frameborder", "0");
+    iframe.setAttribute("class", "youtube-iframe");
+    v.firstChild.replaceWith(iframe);
+}
+
+/** Pause video on modal close **/
+$("#video-modal").on("hidden.bs.modal", function (e) {
+    $(this).find("iframe").remove();
+});
+
+/** Pause video on modal close **/
+$("#video-modal").on("show.bs.modal", function (e) {
+    getVideos();
+});
     </script>
 
 <style>
 .youtube-container {
     display: block;
     width: 100%;
-    max-width: 600px;
+    max-width: 1200px;
     margin: 30px auto;
 }
 
@@ -144,4 +142,9 @@ div.youtube-play-btn {
     left: 0;
 }
 </style>
-@stop
+
+
+
+
+
+@endsection

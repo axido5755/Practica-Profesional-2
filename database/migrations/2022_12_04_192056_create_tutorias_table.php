@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('ID_Lista_Tutorias')->references('ID_Lista_Tutorias')->on('lista_tutorias');
             $table->string('Titulo');
             $table->integer('Numeracion');
+            $table->text('Contenido')-> nullable();
             $table->string('Link_Video');
             $table->Date('Fecha_Publicacion');
             $table->boolean('Activo');

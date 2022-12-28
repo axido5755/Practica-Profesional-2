@@ -58,6 +58,7 @@ class TutoriaController extends Controller
         $Tutoria->Titulo =  $request->input('Titulo');
         $Tutoria->Numeracion =  $request->input('Numeracion');
         $Tutoria->Link_video =  $request->input('Link_video');
+        $Tutoria->Contenido =  $request->input('Contenido');
         $Tutoria->Fecha_Publicacion =  Carbon::now();
 
         if($request->input('activo')=='on'){
@@ -140,5 +141,43 @@ class TutoriaController extends Controller
         ->get();
         
         return view('Tutorias.listado', compact('lista_Tutorias'));
+    }
+
+    public function listadohome($ID_Lista_Tutorias)
+    {
+        $lista_Tutorias = DB::table('tutorias') 
+        ->select(   'tutorias.ID_Tutoria',
+                    'tutorias.ID_Lista_Tutorias',
+                    'tutorias.Titulo',
+                    'tutorias.Numeracion',
+                    'tutorias.Link_video',
+                    'tutorias.Activo')
+        ->where("tutorias.ID_Lista_Tutorias",$ID_Lista_Tutorias) 
+        ->get();
+
+        $Lista = DB::table('lista_Tutorias') 
+        ->select(   'lista_Tutorias.Nombre_Lenguaje',
+                    'lista_Tutorias.Descripcion')
+        ->where("lista_Tutorias.ID_Lista_Tutorias",$ID_Lista_Tutorias) 
+        ->first();
+
+        return view('TutoriaPanel.ListaPanel', compact('lista_Tutorias','Lista'));
+    }
+
+    public function video($ID_Lista,$ID_Lista_Tutorias){
+
+        $lista_Tutorias = DB::table('tutorias') 
+        ->select(   'tutorias.ID_Tutoria',
+                    'tutorias.ID_Lista_Tutorias',
+                    'tutorias.Titulo',
+                    'tutorias.Numeracion',
+                    'tutorias.Link_video',
+                    'tutorias.Activo',
+                    'tutorias.Contenido')
+        ->where("tutorias.ID_Tutoria",$ID_Lista) 
+        ->where("tutorias.ID_Lista_Tutorias",$ID_Lista_Tutorias) 
+        ->first();
+        return view('TutoriaPanel.Panel', compact('lista_Tutorias'));
+
     }
 }
