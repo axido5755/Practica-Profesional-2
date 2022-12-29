@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\lista_tutorias;
+use App\Models\lista_tutoria;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -63,7 +63,7 @@ class ListaTutoriaController extends Controller
 
         $this->validate($request,$campos,$Mensaje);
 
-        $Lista_Tutorias = new lista_tutorias();
+        $Lista_Tutorias = new lista_tutoria();
         $Lista_Tutorias->Nombre_Lenguaje =  $request->input('Nombre_Lenguaje');
         $Lista_Tutorias->Descripcion =  $request->input('Descripcion');
         $Lista_Tutorias->ID_Usuario =  1;
@@ -77,17 +77,17 @@ class ListaTutoriaController extends Controller
 
         $Lista_Tutorias->save();
 
-        $Lista_Tutorias = lista_tutorias::all();
+        $Lista_Tutorias = lista_tutoria::all();
         return view('Tutorias.create', compact('Lista_Tutorias'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Lista_Tutorias  $lista_Tutorias
+     * @param  \App\Models\lista_tutoria  $lista_Tutorias
      * @return \Illuminate\Http\Response
      */
-    public function show(lista_tutorias $lista_Tutorias)
+    public function show(lista_tutoria $lista_Tutorias)
     {
         //
     }
@@ -95,10 +95,10 @@ class ListaTutoriaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Lista_Tutorias  $lista_Tutorias
+     * @param  \App\Models\lista_tutoria  $lista_Tutorias
      * @return \Illuminate\Http\Response
      */
-    public function edit(lista_tutorias $lista_Tutorias)
+    public function edit(lista_tutoria $lista_Tutorias)
     {
         //
     }
@@ -107,7 +107,7 @@ class ListaTutoriaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Lista_Tutorias  $lista_Tutorias
+     * @param  \App\Models\lista_tutoria  $lista_Tutorias
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, lista_tutorias $lista_Tutorias)
@@ -118,10 +118,10 @@ class ListaTutoriaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Lista_Tutorias  $lista_Tutorias
+     * @param  \App\Models\lista_tutoria  $lista_Tutorias
      * @return \Illuminate\Http\Response
      */
-    public function destroy(lista_tutorias $lista_Tutorias)
+    public function destroy(lista_tutoria $lista_Tutorias)
     {
         //
     }
