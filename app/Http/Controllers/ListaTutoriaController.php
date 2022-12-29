@@ -16,14 +16,14 @@ class ListaTutoriaController extends Controller
      */
     public function index()
     {
-        $lista_Tutorias = DB::table('lista_Tutorias') 
-        ->join('usuarios','lista_Tutorias.ID_Usuario','=','usuarios.ID_Usuario')
-        ->select(   'lista_Tutorias.ID_Lista_Tutorias',
+        $lista_Tutorias = DB::table('lista_tutorias') 
+        ->join('usuarios','lista_tutorias.ID_Usuario','=','usuarios.ID_Usuario')
+        ->select(   'lista_tutorias.ID_Lista_Tutorias',
                     'usuarios.Nombre',
                     'usuarios.Apellido',
                     'usuarios.Rut',
-                    'lista_Tutorias.Nombre_Lenguaje',
-                    'lista_Tutorias.Activo')
+                    'lista_tutorias.Nombre_Lenguaje',
+                    'lista_tutorias.Activo')
         ->get();
 
 
@@ -129,11 +129,11 @@ class ListaTutoriaController extends Controller
     public function listado()
     {
         $lista_Tutorias = DB::table('tutorias')
-        ->rightJoin('lista_tutorias','tutorias.ID_Lista_Tutorias','=','lista_Tutorias.ID_Lista_Tutorias')
+        ->rightJoin('lista_tutorias','tutorias.ID_Lista_Tutorias','=','lista_tutorias.ID_Lista_Tutorias')
         ->leftJoin('usuarios','lista_tutorias.ID_Usuario','=','usuarios.ID_Usuario') 
-        ->select(   'lista_Tutorias.ID_Lista_Tutorias',
-                    'lista_Tutorias.Nombre_Lenguaje',
-                    'lista_Tutorias.Descripcion',
+        ->select(   'lista_tutorias.ID_Lista_Tutorias',
+                    'lista_tutorias.Nombre_Lenguaje',
+                    'lista_tutorias.Descripcion',
                     'usuarios.Nombre',
                     'usuarios.Apellido',
                     'tutorias.Link_video')

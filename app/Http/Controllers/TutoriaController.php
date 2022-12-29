@@ -131,7 +131,7 @@ class TutoriaController extends Controller
     public function listado($ID_Lista_Tutorias)
     {
         $lista_Tutorias = DB::table('tutorias') 
-        ->join('lista_Tutorias','tutorias.ID_Lista_Tutorias','=','lista_Tutorias.ID_Lista_Tutorias')
+        ->join('lista_tutorias','tutorias.ID_Lista_Tutorias','=','lista_tutorias.ID_Lista_Tutorias')
         ->select(   'tutorias.ID_Lista_Tutorias',
                     'tutorias.Titulo',
                     'tutorias.Numeracion',
@@ -155,10 +155,10 @@ class TutoriaController extends Controller
         ->where("tutorias.ID_Lista_Tutorias",$ID_Lista_Tutorias) 
         ->get();
 
-        $Lista = DB::table('lista_Tutorias') 
-        ->select(   'lista_Tutorias.Nombre_Lenguaje',
-                    'lista_Tutorias.Descripcion')
-        ->where("lista_Tutorias.ID_Lista_Tutorias",$ID_Lista_Tutorias) 
+        $Lista = DB::table('lista_tutorias') 
+        ->select(   'lista_tutorias.Nombre_Lenguaje',
+                    'lista_tutorias.Descripcion')
+        ->where("lista_tutorias.ID_Lista_Tutorias",$ID_Lista_Tutorias) 
         ->first();
 
         return view('TutoriaPanel.ListaPanel', compact('lista_Tutorias','Lista'));
