@@ -63,7 +63,7 @@ class ListaTutoriaController extends Controller
 
         $this->validate($request,$campos,$Mensaje);
 
-        $Lista_Tutorias = new lista_Tutoria();
+        $Lista_Tutorias = new lista_tutorias();
         $Lista_Tutorias->Nombre_Lenguaje =  $request->input('Nombre_Lenguaje');
         $Lista_Tutorias->Descripcion =  $request->input('Descripcion');
         $Lista_Tutorias->ID_Usuario =  1;
@@ -77,7 +77,7 @@ class ListaTutoriaController extends Controller
 
         $Lista_Tutorias->save();
 
-        $Lista_Tutorias = lista_Tutoria::all();
+        $Lista_Tutorias = lista_tutorias::all();
         return view('Tutorias.create', compact('Lista_Tutorias'));
     }
 
@@ -87,7 +87,7 @@ class ListaTutoriaController extends Controller
      * @param  \App\Models\Lista_Tutorias  $lista_Tutorias
      * @return \Illuminate\Http\Response
      */
-    public function show(Lista_Tutorias $lista_Tutorias)
+    public function show(lista_tutorias $lista_Tutorias)
     {
         //
     }
@@ -98,7 +98,7 @@ class ListaTutoriaController extends Controller
      * @param  \App\Models\Lista_Tutorias  $lista_Tutorias
      * @return \Illuminate\Http\Response
      */
-    public function edit(Lista_Tutorias $lista_Tutorias)
+    public function edit(lista_tutorias $lista_Tutorias)
     {
         //
     }
@@ -110,7 +110,7 @@ class ListaTutoriaController extends Controller
      * @param  \App\Models\Lista_Tutorias  $lista_Tutorias
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Lista_Tutorias $lista_Tutorias)
+    public function update(Request $request, lista_tutorias $lista_Tutorias)
     {
         //
     }
@@ -121,7 +121,7 @@ class ListaTutoriaController extends Controller
      * @param  \App\Models\Lista_Tutorias  $lista_Tutorias
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Lista_Tutorias $lista_Tutorias)
+    public function destroy(lista_tutorias $lista_Tutorias)
     {
         //
     }
