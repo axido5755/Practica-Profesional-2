@@ -85,8 +85,6 @@ class UsuarioController extends Controller
 
     public function login(Request $request)
     {
-        console.log("asdasda");
-        dd("asdasda");
         $this->validate($request, [
             'email' => 'required|email',
             'pass' => 'required',

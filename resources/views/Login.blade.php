@@ -103,8 +103,6 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
         }
         const res = await axios.post(url, data);
         const usuario = res.data;
-
-        console.log(usuario);
         
         if(!usuario){
             new AWN().alert('Credenciales invalidas');
