@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tutoria;
-use App\Models\lista_Tutoria;
+use App\Models\lista_tutorias;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -26,7 +26,7 @@ class TutoriaController extends Controller
      */
     public function create()
     {
-        $Lista_Tutorias = lista_Tutoria::all();
+        $Lista_Tutorias = lista_tutorias::all();
         return view('Tutorias.create', compact('Lista_Tutorias'));
     }
 

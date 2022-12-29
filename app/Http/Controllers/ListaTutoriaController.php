@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\lista_Tutoria;
+use App\Models\lista_tutorias;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
