@@ -9,6 +9,8 @@ class Tutoria extends Model
 {
     use HasFactory;
 
+    protected $table = 'tutorias';
+
     public function comentario()
     {
         return $this->belongsToMany(Tutoria::class, 'comentarios');

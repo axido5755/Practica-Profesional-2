@@ -9,6 +9,8 @@ class Usuario extends Model
 {
     use HasFactory;
 
+    protected $table = 'usuario';
+
     public function comentario()
     {
         return $this->belongsToMany(Usuario::class, 'comentarios');
