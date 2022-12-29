@@ -129,12 +129,8 @@ class ListaTutoriaController extends Controller
     public function listado()
     {
         $lista_Tutorias = DB::table('tutorias')
-        ->rightJoin('lista_Tutorias','tutorias.ID_Lista_Tutorias','=','lista_Tutorias.ID_Lista_Tutorias')
         ->leftJoin('usuarios','lista_Tutorias.ID_Usuario','=','usuarios.ID_Usuario') 
-        ->select(   'lista_Tutorias.ID_Lista_Tutorias',
-                    'lista_Tutorias.Nombre_Lenguaje',
-                    'lista_Tutorias.Descripcion',
-                    'usuarios.Nombre',
+        ->select(   'usuarios.Nombre',
                     'usuarios.Apellido',
                     'tutorias.Link_video')
         ->get();
