@@ -80,7 +80,7 @@ class TutoriaController extends Controller
         ->get();
 
 
-        return view('lista_Tutorias.index', compact('lista_Tutorias'));
+        return view('Lista_Tutorias.index', compact('lista_Tutorias'));
     }
 
     /**
