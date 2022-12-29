@@ -69,14 +69,14 @@ class TutoriaController extends Controller
         $Tutoria->save();
 
 
-        $lista_Tutorias = DB::table('lista_Tutorias') 
-        ->join('usuarios','lista_Tutorias.ID_Usuario','=','usuarios.ID_Usuario')
-        ->select(   'lista_Tutorias.ID_Lista_Tutorias',
+        $lista_Tutorias = DB::table('lista_tutorias') 
+        ->join('usuarios','lista_tutorias.ID_Usuario','=','usuarios.ID_Usuario')
+        ->select(   'lista_tutorias.ID_Lista_Tutorias',
                     'usuarios.Nombre',
                     'usuarios.Apellido',
                     'usuarios.Rut',
-                    'lista_Tutorias.Nombre_Lenguaje',
-                    'lista_Tutorias.Activo')
+                    'lista_tutorias.Nombre_Lenguaje',
+                    'lista_tutorias.Activo')
         ->get();
 
 
