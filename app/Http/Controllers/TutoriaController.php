@@ -180,4 +180,10 @@ class TutoriaController extends Controller
         return view('TutoriaPanel.Panel', compact('lista_Tutorias'));
 
     }
+
+    public function create2($ID_Usuario)
+    {
+        $Lista_Tutorias = lista_tutoria::where('ID_Usuario',$ID_Usuario)->get();
+        return view('Tutorias.create', compact('Lista_Tutorias'));
+    }
 }

@@ -24,7 +24,8 @@
                 {{-- Autor --}}
                 <div class="form-group">
                     <label>Autor:</label>
-                    <input type="text" class="form-control" name='referencia' maxlength="100" minlength="0" >
+                    <input id="autor" type="text" class="form-control" name='Autor' maxlength="100" minlength="0" disabled>
+                    <input id="ID_Usuario" type="hidden" name='ID_Usuario'>
                 </div>
                 
                 {{-- ACTIVO --}}
@@ -37,4 +38,14 @@
             </form>
         </div>
     </div>
+
+    <script>
+        const usuarioJsonn = localStorage.getItem("usuario");
+        const usuario = JSON.parse(usuarioJsonn);
+        span = document.getElementById("autor");
+        span.value  =`${usuario.Nombre} ${usuario.Apellido}`;
+
+        Usuario_id = document.getElementById("ID_Usuario");
+        Usuario_id.value =`${usuario.ID_Usuario}`;
+    </script>
 @endsection

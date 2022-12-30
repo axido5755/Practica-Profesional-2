@@ -48,7 +48,7 @@ class ListaTutoriaController extends Controller
      */
     public function store(Request $request)
     {
-            //return $request->all();
+        //return $request->all();
 
         //  dd($request);
 
@@ -66,7 +66,7 @@ class ListaTutoriaController extends Controller
         $Lista_Tutorias = new lista_tutoria();
         $Lista_Tutorias->Nombre_Lenguaje =  $request->input('Nombre_Lenguaje');
         $Lista_Tutorias->Descripcion =  $request->input('Descripcion');
-        $Lista_Tutorias->ID_Usuario =  1;
+        $Lista_Tutorias->ID_Usuario =  $request->input('ID_Usuario');
         $Lista_Tutorias->Fecha_Creacion =  Carbon::now();
 
         if($request->input('activo')=='on'){
@@ -77,7 +77,7 @@ class ListaTutoriaController extends Controller
 
         $Lista_Tutorias->save();
 
-        $Lista_Tutorias = lista_tutoria::all();
+        $Lista_Tutorias = lista_tutoria::where('ID_Usuario',$request->input('ID_Usuario'))->get();
         return view('Tutorias.create', compact('Lista_Tutorias'));
     }
 

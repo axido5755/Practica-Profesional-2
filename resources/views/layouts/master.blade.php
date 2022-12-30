@@ -73,7 +73,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Pestaña listado:</h6>
                         <a class="collapse-item" href="/Lista_Tutorias">Mostrar listado</a>
-                        <a class="collapse-item" href="/Lista_Tutorias/create">Crear un listado</a>
+                        <a id="crearlista" class="collapse-item" href="/Lista_Tutorias/create">Crear un listado</a>
                     </div>
                 </div>
             </li>
@@ -237,6 +237,7 @@
             const usuario = JSON.parse(usuarioJson);
             const span = document.getElementById('username');
             span.textContent =`${usuario.Nombre} ${usuario.Apellido}`;
+            document.getElementById('crearlista').setAttribute('href', `/Lista_Tutorias/create2/${usuario.ID_Usuario}`);
         }else{
             const dropdown = document.getElementById('userDropdown');
             dropdown.disabled = true;
@@ -249,7 +250,6 @@
             const loginUrl = "{{ url('/Login') }}"
             window.location.replace(loginUrl);
         }
-
     </script>
     
     
