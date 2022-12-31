@@ -237,7 +237,6 @@
             const usuario = JSON.parse(usuarioJson);
             const span = document.getElementById('username');
             span.textContent =`${usuario.Nombre} ${usuario.Apellido}`;
-            document.getElementById('crearlista').setAttribute('href', `/Lista_Tutorias/create2/${usuario.ID_Usuario}`);
         }else{
             const dropdown = document.getElementById('userDropdown');
             dropdown.disabled = true;
