@@ -19,14 +19,14 @@ class ListaTutoriaController extends Controller
         $lista_Tutorias = DB::table('lista_tutorias') 
         ->join('usuarios','lista_tutorias.ID_Usuario','=','usuarios.ID_Usuario')
         ->select(   'lista_tutorias.ID_Lista_Tutorias',
+                    'usuarios.ID_Usuario',
                     'usuarios.Nombre',
                     'usuarios.Apellido',
                     'usuarios.Rut',
                     'lista_tutorias.Nombre_Lenguaje',
                     'lista_tutorias.Activo')
         ->get();
-
-
+        
         return view('Lista_Tutorias.index', compact('lista_Tutorias'));
     }
 
@@ -77,7 +77,7 @@ class ListaTutoriaController extends Controller
 
         $Lista_Tutorias->save();
 
-        $Lista_Tutorias = lista_tutoria::where('ID_Usuario',$request->input('ID_Usuario'))->get();
+        $Lista_Tutorias = lista_tutoria::select('ID_Lista_Tutorias','Nombre_Lenguaje')->orderBy('ID_Lista_Tutorias', 'desc')->first();
         return view('Tutorias.create', compact('Lista_Tutorias'));
     }
 
@@ -139,6 +139,8 @@ class ListaTutoriaController extends Controller
                     'tutorias.Link_video')
         ->get();
         $lista_Tutorias = $lista_Tutorias->unique('Nombre_Lenguaje');
-        return view('Home', compact('lista_Tutorias'));
+        $id_lista = $lista_Tutorias->ID_Lista_Tutorias;
+        dd($id_lista);
+        return view('Home', compact('lista_Tutorias','id_lista'));
     }
 }

@@ -140,7 +140,7 @@ class TutoriaController extends Controller
         ->where("tutorias.ID_Lista_Tutorias",$ID_Lista_Tutorias) 
         ->get();
         
-        return view('Tutorias.listado', compact('lista_Tutorias'));
+        return view('Tutorias.listado', compact('lista_Tutorias','ID_Lista_Tutorias'));
     }
 
     public function listadohome($ID_Lista_Tutorias)
@@ -181,9 +181,10 @@ class TutoriaController extends Controller
 
     }
 
-    public function create2($ID_Usuario)
+    public function create2($ID_Lista_Tutorias)
     {
-        $Lista_Tutorias = lista_tutoria::where('ID_Usuario',$ID_Usuario)->get();
-        return view('Tutorias.create', compact('Lista_Tutorias'));
+        $Lista_Tutorias = lista_tutoria::where('ID_Lista_Tutorias',$ID_Lista_Tutorias)->first();
+        $id_lista = lista_tutoria::select('ID_Lista_Tutorias')->where('ID_Lista_Tutorias',$ID_Lista_Tutorias)->first();
+        return view('Tutorias.create', compact('Lista_Tutorias','id_lista'));
     }
 }

@@ -10,21 +10,16 @@
                 @csrf
 
                 {{-- Asignacion de lenguaje --}}
-                <label">Lenguaje de progrmacion:</label>
-                <select class="form-select" name="ID_Lista_Tutorias" id="ID_Lista_Tutorias" aria-label="Seleccione la calle del estacionamiento" required>
-                    <option value="">Seleccione el lenguaje de programacion</option>
-                    @foreach ($Lista_Tutorias as $Lista_Tutorias)
-                        <option 
-                            value="{{$Lista_Tutorias->ID_Lista_Tutorias}}">{{$Lista_Tutorias->Nombre_Lenguaje}}
-                        </option>
-                        
-                    @endforeach
-                </select>
+                <div class="form-group">
+                    <label>Lenguaje de programacion:</label>
+                    <input type="text" class="form-control" name='Nombre_Lenguaje' maxlength="100" minlength="0"  value="{{$Lista_Tutorias->Nombre_Lenguaje}}" disabled required>
+                    <input id="ID_Lista_Tutorias" type="hidden" name='ID_Lista_Tutorias' value="{{$Lista_Tutorias->ID_Lista_Tutorias}}">
+                </div>
 
                 {{-- Titulo --}}
                 <div class="form-group">
                     <label>Titulo de tutoria:</label>
-                    <input type="text" class="form-control" name='Titulo' maxlength="100" minlength="0" >
+                    <input type="text" class="form-control" name='Titulo' maxlength="100" minlength="0" required>
                 </div>
 
                 {{-- Numeracion --}}
@@ -37,7 +32,7 @@
                 {{-- Link_video --}}
                 <div class="form-group">
                     <label>Link Video:</label>
-                    <input type="text" class="form-control" name='Link_video' maxlength="100" minlength="0" >
+                    <input type="text" class="form-control" name='Link_video' maxlength="100" minlength="0" required>
                 </div>
                 
                 {{-- Contenido --}}

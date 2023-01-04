@@ -8,7 +8,7 @@
             <h1>Listado de tutorias</h1>
     
             <div>
-                <a class="btn btn-primary" href="/Tutoria/create">Crear tutoria</a>
+                <a class="btn btn-primary" href="/Tutoria/create2/{{$ID_Lista_Tutorias}}">Crear tutoria</a>
             </div>
             
             
@@ -30,8 +30,8 @@
                     @foreach ($lista_Tutorias as $lista_Tutorias)
                                           
                         <tr>
-                            <td>{{$lista_Tutorias->Titulo}}</td>
                             <td>{{$lista_Tutorias->Numeracion}}</td>
+                            <td>{{$lista_Tutorias->Titulo}}</td>
                             <td>{{$lista_Tutorias->Link_video}}</td>
 
                             @if($lista_Tutorias->Activo == 1)

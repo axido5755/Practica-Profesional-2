@@ -12,25 +12,25 @@
                 {{-- Lenguaje de tutoria --}}
                 <div class="form-group">
                     <label>Lenguaje de tutoria:</label>
-                    <input type="text" class="form-control" name='Nombre_Lenguaje' maxlength="100" minlength="0" >
+                    <input type="text" class="form-control" name='Nombre_Lenguaje' maxlength="100" minlength="0" required>
                 </div>
 
                 {{-- Descripcion --}}
                 <div class="form-group">
                     <label>Descripcion:</label>
-                    <input type="text" class="form-control" name='Descripcion' maxlength="100" minlength="0" >
+                    <input type="text" class="form-control" name='Descripcion' maxlength="100" minlength="0" required>
                 </div>
 
                 {{-- Autor --}}
                 <div class="form-group">
                     <label>Autor:</label>
-                    <input id="autor" type="text" class="form-control" name='Autor' maxlength="100" minlength="0" disabled>
+                    <input id="autor" type="text" class="form-control" name='Autor' maxlength="100" minlength="0" disabled required>
                     <input id="ID_Usuario" type="hidden" name='ID_Usuario'>
                 </div>
                 
                 {{-- ACTIVO --}}
                 <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="activo" name='activo' onchange="cambioActivo()" checked>
+                    <input class="form-check-input" type="checkbox" id="activo" name='activo' onchange="cambioActivo()" checked> required
                     <label id="labelActivo">Lista Tutoria Habilitado</label>
                 </div>
 
