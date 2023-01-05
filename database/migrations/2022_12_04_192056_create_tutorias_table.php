@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('tutorias', function (Blueprint $table) {
             $table->id('ID_Tutoria');
             $table->unsignedBigInteger('ID_Lista_Tutorias');
-            $table->foreign('ID_Lista_Tutorias')->references('ID_Lista_Tutorias')->on('lista_tutorias');
+            $table->foreign('ID_Lista_Tutorias')->references('ID_Lista_Tutorias')->on('lista_tutorias')->onDelete('cascade');
             $table->string('Titulo');
             $table->integer('Numeracion');
             $table->text('Contenido')-> nullable();

@@ -131,9 +131,24 @@ class TutoriaController extends Controller
      * @param  \App\Models\Tutoria  $tutoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tutoria $tutoria)
+    public function destroy($ID_Tutoria)
     {
-        //
+
+        $ID_Lista_Tutorias = Tutoria::where('ID_Tutoria',$ID_Tutoria)->first()->ID_Lista_Tutorias;
+        Tutoria::where('ID_Tutoria',$ID_Tutoria)->delete();
+
+        $lista_Tutorias = DB::table('tutorias') 
+        ->join('lista_tutorias','tutorias.ID_Lista_Tutorias','=','lista_tutorias.ID_Lista_Tutorias')
+        ->select(   'tutorias.ID_Tutoria',
+                    'tutorias.ID_Lista_Tutorias',
+                    'tutorias.Titulo',
+                    'tutorias.Numeracion',
+                    'tutorias.Link_video',
+                    'tutorias.Activo')
+        ->where("tutorias.ID_Lista_Tutorias",$ID_Lista_Tutorias) 
+        ->get();
+    
+        return view('Tutorias.listado', compact('lista_Tutorias','ID_Lista_Tutorias'));
     }
 
     public function listado($ID_Lista_Tutorias)

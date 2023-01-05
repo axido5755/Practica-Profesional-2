@@ -6,13 +6,13 @@
     <div class="container-fluid">
         <div class="container">
             <h1>Listado de tutorias</h1>
-    
             <div>
-                <a class="btn btn-primary" href="/Lista_Tutorias/create">Crear curso de tutorias</a>
-            </div>
-            
-            
-            <div>
+                <div class="row">
+                    <div class="col col-xs" style="margin-inline: 0px; padding-inline: 0px">
+                        <a class="btn btn-primary" href="/Lista_Tutorias/create">Crear curso de tutorias</a>
+                    </div>
+                </div>
+
                 <div class="row">
                     <table class="table table-bordered table-responsive-lg">
                 <thead>
@@ -81,7 +81,7 @@
                                           </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                            <form action="{{url('/lista_Tutorias/'.$lista_Tutorias->ID_Lista_Tutorias)}}" method="POST" >
+                                            <form action="{{url('/Lista_Tutorias/'.$lista_Tutorias->ID_Lista_Tutorias)}}" method="POST" >
                                             @csrf
                                             {{method_field('DELETE')}}
                                             <button type="submit" class="btn btn-primary">Eliminar</button>
