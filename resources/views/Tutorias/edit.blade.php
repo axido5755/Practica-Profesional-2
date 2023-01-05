@@ -7,72 +7,66 @@
         <div class="container">
 
 
-            <h1>Editando estacionamiento {{$estacionamiento->ID_Estacionamiento}}</h1>
+            <h1>Editando tutoria {{$Tutoria->Titulo}}</h1>
 
-            
                         
-            <form class="form-group" method="POST" action="/estacionamientos/{{$estacionamiento->ID_Estacionamiento}}">
+            <form class="form-group" method="POST" action="/Tutoria/store2/{{$Tutoria->ID_Tutoria}}">
                 @method('PUT')
                 @csrf
 
                 {{-- CALLE--}}
-                <select class="form-select" name="ID_Lista" id="ID_Lista" aria-label="Default select example" require>
-
-                    @foreach($calles as $calle)
-
-                    @if($calle->ID_Lista == $estacionamiento->ID_Lista)
+                <select class="form-select" name="ID_Lista_Tutorias" id="ID_Lista_Tutorias" aria-label="Default select example" require>
+                    @foreach ($Lista_Tutorias as $Lista_Tutorias)
                         <option 
-                            value="{{$calle->ID_Lista}}">{{$calle->Nombre_Calle}}
-                        </option>
-                    @endif
-
-                    @endforeach
-           
-                    @foreach ($calles as $calle)
-
-                        <option 
-                            value="{{$calle->ID_Lista}}">{{$calle->Nombre_Calle}}
-                        </option>
-
-                        
+                            value="{{$Lista_Tutorias->ID_Lista_Tutorias}}">{{$Lista_Tutorias->Nombre_Lenguaje}}
+                        </option>                     
                     @endforeach
                 </select>
-                {{-- NUMERO --}}
                 
+                {{-- Titulo --}}
                 <div class="form-group">
-                    <label>Número:</label>
-                    <input type="number" class="form-control" value="{{$estacionamiento->Numero}}" name='numero' max="1000000" min="1" required>
-                </div>
-                
-                {{-- LATITUD --}}
-                <div class="form-group">
-                    <label>Latitud:</label>
-                    <input type="number" class="form-control" name='latitud' value="{{$estacionamiento->Latitud}}" step="0.000000000000001" max="90" min="-90" required>
+                    <label>Titulo de tutoria:</label>
+                    <input type="text" class="form-control" name='Titulo' maxlength="100" minlength="0" value="{{$Tutoria->Titulo}}" required>
                 </div>
 
-                {{-- LONGITUD --}}
+                {{-- Numeracion --}}
                 <div class="form-group">
-                    <label>Longitud:</label>
-                    <input type="number" class="form-control" name='longitud' value="{{$estacionamiento->Longitud}}" step="0.000000000000001" max="180" min="-180" required>
+                    <label>Posicion de tutoria:</label>
+                    <input type="number" class="form-control" name='Numeracion' min="1" max="30" value="{{$Tutoria->Numeracion}}" required>
                 </div>
 
-                {{-- CAPACIDAD TOTAL --}}
+                @if(count($errors)>0)
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                        <li> {{ implode('', $errors->all(':message')) }}</li>
+                    </ul>
+                </div>
+                @endif
+
+                {{-- Link_video --}}
                 <div class="form-group">
-                    <label>Capacidad:</label>
-                    <input type="number" class="form-control" value="{{$estacionamiento->Capacidad_Total}}" name='capacidad_total' min="1" max="30" required>
+                    <label>Link Video:</label>
+                    <input type="text" class="form-control" name='Link_video' maxlength="100" minlength="0" value="{{$Tutoria->Link_Video}}" required>
                 </div>
 
-                {{-- REFERENCIA --}}
-                <div class="form-group">
-                    <label>Referencia:</label>
-                    <input type="text" class="form-control" value="{{$estacionamiento->Referencia}}" name='referencia' maxlength="100" minlength="0">
+                {{-- Contenido --}}
+
+                <div class="container mt-4 mb-4">
+                <!--Bootstrap classes arrange web page components into columns and rows in a grid -->
+                <div class="row justify-content-md-center">
+                    <div class="col-md-12 col-lg-8">
+                        <label>Contenido</label>
+                        <div class="form-group">
+                            <textarea name='Contenido' id="Contenido" value="{{$Tutoria->Contenido}}">{{$Tutoria->Contenido}}</textarea>
+                        </div>
+                    </div>
                 </div>
 
                 {{-- ACTIVO --}}
 
                 <div class="form-check form-switch">
 
-                    @if($estacionamiento->Activo == 1)
+                    @if($Tutoria->Activo == 1)
                         <input class="form-check-input" type="checkbox" id="activo" name='activo' onchange="cambioActivo()" checked>
                         <label id="labelActivo">Habilitado</label>
                     @else
@@ -90,19 +84,16 @@
         </div>
     </div>
 
-@endsection
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
-@section('scripts')
-
-    <script>
-        function cambioActivo(){
-            if(document.getElementById("labelActivo").innerHTML == "Habilitado"){
-                document.getElementById("labelActivo").innerHTML="Inhabilitado";
-            }else{
-                document.getElementById("labelActivo").innerHTML="Habilitado";
-            }
-            
-        }
-    </script>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+ <script>
+   tinymce.init({
+     selector: '#Contenido', // Replace this CSS selector to match the placeholder element for TinyMCE
+     statusbar: false,
+     plugins: 'code table lists',
+     toolbar: 'undo redo | formatselect| bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
+   });
+ </script>
 
 @endsection

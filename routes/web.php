@@ -38,3 +38,7 @@ Route::get('/', 'App\Http\Controllers\ListaTutoriaController@listado');
 Route::get('/Tutoria/Video/{ID_Lista}/{ID_Tutoria}', 'App\Http\Controllers\TutoriaController@video');
 //Route::get('/Lista_Tutorias/create2/{ID_Usuario}', 'App\Http\Controllers\TutoriaController@create2');
 Route::get('/Tutoria/create2/{ID_Lista_Tutorias}', 'App\Http\Controllers\TutoriaController@create2');
+Route::get('/Tutoria/edit2/{ID_Tutoria}', 'App\Http\Controllers\TutoriaController@edit2');
+Route::put('/Tutoria/store2/{ID_Tutoria}', 'App\Http\Controllers\TutoriaController@store2');
+Route::get('/Lista_Tutorias/edit2/{ID_Tutoria}', 'App\Http\Controllers\ListaTutoriaController@edit2');
+Route::put('/Lista_Tutorias/store2/{ID_Tutoria}', 'App\Http\Controllers\ListaTutoriaController@store2');

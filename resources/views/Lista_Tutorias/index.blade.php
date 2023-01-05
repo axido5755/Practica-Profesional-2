@@ -58,7 +58,7 @@
                         </td>
 
                         <td>
-                            <a href="{{url('/lista_Tutorias/'.$lista_Tutorias->ID_Lista_Tutorias.'/edit')}}">
+                            <a href="{{url('/Lista_Tutorias/edit2/'.$lista_Tutorias->ID_Lista_Tutorias)}}">
                                 <i class="fas fa-edit  fa-lg" ></i>
                             </a>
                         </td>

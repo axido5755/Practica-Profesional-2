@@ -7,6 +7,7 @@ use App\Models\lista_tutoria;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Redirect;
 
 class TutoriaController extends Controller
 {
@@ -38,6 +39,7 @@ class TutoriaController extends Controller
      */
     public function store(Request $request)
     {
+        
         $campos=[
             'ID_Lista_Tutorias'=>'required|integer',
             'Titulo'  => 'max:100',
@@ -52,6 +54,10 @@ class TutoriaController extends Controller
             "Link_video.max"=>'El campo link no debe superar los 100 caracteres'
         ];
         $this->validate($request,$campos,$Mensaje);
+        if(Tutoria::where('Numeracion',$request->input('Numeracion'))
+                    ->where('ID_Lista_Tutorias',$request->input('ID_Lista_Tutorias'))
+                    ->first() != null) return Redirect::back()->withErrors("La posicion de la tutoria ya existe");
+            
 
         $Tutoria = new Tutoria();
         $Tutoria->ID_Lista_Tutorias = $request->input('ID_Lista_Tutorias');
@@ -102,7 +108,9 @@ class TutoriaController extends Controller
      */
     public function edit(Tutoria $tutoria)
     {
-        //
+        
+
+
     }
 
     /**
@@ -132,7 +140,8 @@ class TutoriaController extends Controller
     {
         $lista_Tutorias = DB::table('tutorias') 
         ->join('lista_tutorias','tutorias.ID_Lista_Tutorias','=','lista_tutorias.ID_Lista_Tutorias')
-        ->select(   'tutorias.ID_Lista_Tutorias',
+        ->select(   'tutorias.ID_Tutoria',
+                    'tutorias.ID_Lista_Tutorias',
                     'tutorias.Titulo',
                     'tutorias.Numeracion',
                     'tutorias.Link_video',
@@ -184,7 +193,71 @@ class TutoriaController extends Controller
     public function create2($ID_Lista_Tutorias)
     {
         $Lista_Tutorias = lista_tutoria::where('ID_Lista_Tutorias',$ID_Lista_Tutorias)->first();
-        $id_lista = lista_tutoria::select('ID_Lista_Tutorias')->where('ID_Lista_Tutorias',$ID_Lista_Tutorias)->first();
-        return view('Tutorias.create', compact('Lista_Tutorias','id_lista'));
+        $id_lista = $ID_Lista_Tutorias;
+        $Nombre_Lenguaje = $Lista_Tutorias->Nombre_Lenguaje;
+        $Tutorias = Tutoria::select('Numeracion')->where('ID_Lista_Tutorias',$ID_Lista_Tutorias)->get();
+        return view('Tutorias.create', compact('Nombre_Lenguaje','id_lista','Tutorias'));
+    }
+
+    public function edit2($ID_Tutoria)
+    {
+        $Tutoria = Tutoria::where('ID_Tutoria',$ID_Tutoria)->first();
+        $Lista_Tutorias = lista_tutoria::all();
+        return view('Tutorias.edit', compact('Tutoria','Lista_Tutorias','ID_Tutoria'));
+    }
+
+    public function store2(Request $request,$ID_Tutoria)
+    {
+
+        $campos=[
+            'ID_Lista_Tutorias'=>'required|integer',
+            'Titulo'  => 'max:100',
+            'Numeracion'=>'required|integer|max:1000000',
+            'Link_video'  => 'max:100',
+        ];
+        
+        $Mensaje=[
+            "ID_Lista_Tutorias.required"=>'Debe seleccionar un lenguaje a trabajar',
+            "Titulo.max"=>'El campo Titulo no debe superar los 100 caracteres',
+            "Numeracion.required"=>'Debe ingresar un numero de tutoria (posicion)',
+            "Link_video.max"=>'El campo link no debe superar los 100 caracteres'
+        ];
+
+        $this->validate($request,$campos,$Mensaje);
+        if(Tutoria::where('Numeracion',$request->input('Numeracion'))
+        ->where('ID_Lista_Tutorias',$request->input('ID_Lista_Tutorias'))
+        ->first() != null)
+            if(Tutoria::where('ID_Tutoria',$ID_Tutoria)
+                        ->first()
+                        ->Numeracion != $request->input('Numeracion')) return Redirect::back()->withErrors("La posicion de la tutoria ya existe");
+            
+
+        $Tutoria = Tutoria::where('ID_Tutoria',$ID_Tutoria)->first();
+        $Tutoria->ID_Lista_Tutorias = $request->input('ID_Lista_Tutorias');
+        $Tutoria->Titulo =  $request->input('Titulo');
+        $Tutoria->Numeracion =  $request->input('Numeracion');
+        $Tutoria->Link_video =  $request->input('Link_video');
+        $Tutoria->Contenido =  $request->input('Contenido');
+
+        if($request->input('activo')=='on'){
+            $Tutoria->Activo = true;
+        }else{
+            $Tutoria->Activo = false;
+        }
+        $Tutoria->save();
+
+        $lista_Tutorias = DB::table('tutorias') 
+        ->join('lista_tutorias','tutorias.ID_Lista_Tutorias','=','lista_tutorias.ID_Lista_Tutorias')
+        ->select(   'tutorias.ID_Tutoria',
+                    'tutorias.ID_Lista_Tutorias',
+                    'tutorias.Titulo',
+                    'tutorias.Numeracion',
+                    'tutorias.Link_video',
+                    'tutorias.Activo')
+        ->where("tutorias.ID_Lista_Tutorias",$request->input('ID_Lista_Tutorias')) 
+        ->get();
+        
+        $ID_Lista_Tutorias = $request->input('ID_Lista_Tutorias');
+        return view('Tutorias.listado', compact('lista_Tutorias','ID_Lista_Tutorias'));
     }
 }

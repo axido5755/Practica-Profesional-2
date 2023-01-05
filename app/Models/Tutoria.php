@@ -10,7 +10,7 @@ class Tutoria extends Model
     use HasFactory;
 
     protected $table = 'tutorias';
-
+    protected $primaryKey = 'ID_Tutoria';
     public function comentario()
     {
         return $this->belongsToMany(Tutoria::class, 'comentarios');

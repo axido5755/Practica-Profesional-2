@@ -47,7 +47,7 @@
                         </td>
 
                         <td>
-                            <a href="">
+                            <a href="/Tutoria/edit2/{{$lista_Tutorias->ID_Tutoria}}">
                                 <i class="fas fa-edit  fa-lg" ></i>
                             </a>
                         </td>

@@ -12,8 +12,8 @@
                 {{-- Asignacion de lenguaje --}}
                 <div class="form-group">
                     <label>Lenguaje de programacion:</label>
-                    <input type="text" class="form-control" name='Nombre_Lenguaje' maxlength="100" minlength="0"  value="{{$Lista_Tutorias->Nombre_Lenguaje}}" disabled required>
-                    <input id="ID_Lista_Tutorias" type="hidden" name='ID_Lista_Tutorias' value="{{$Lista_Tutorias->ID_Lista_Tutorias}}">
+                    <input type="text" class="form-control" name='Nombre_Lenguaje' maxlength="100" minlength="0"  value="{{$Nombre_Lenguaje}}" disabled required>
+                    <input id="ID_Lista_Tutorias" type="hidden" name='ID_Lista_Tutorias' value="{{$id_lista}}">
                 </div>
 
                 {{-- Titulo --}}
@@ -27,6 +27,14 @@
                     <label>Posicion de tutoria:</label>
                     <input type="number" class="form-control" name='Numeracion' min="1" max="30" required>
                 </div>
+
+                @if(count($errors)>0)
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                        <li> {{ implode('', $errors->all(':message')) }}</li>
+                    </ul>
+                </div>
+                @endif
 
                 
                 {{-- Link_video --}}
@@ -72,5 +80,8 @@
      toolbar: 'undo redo | formatselect| bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
    });
  </script>
+
+
+
 
 @endsection

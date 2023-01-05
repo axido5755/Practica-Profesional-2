@@ -78,7 +78,9 @@ class ListaTutoriaController extends Controller
         $Lista_Tutorias->save();
 
         $Lista_Tutorias = lista_tutoria::select('ID_Lista_Tutorias','Nombre_Lenguaje')->orderBy('ID_Lista_Tutorias', 'desc')->first();
-        return view('Tutorias.create', compact('Lista_Tutorias'));
+        $id_lista = $Lista_Tutorias->ID_Lista_Tutorias;
+        $Nombre_Lenguaje = $Lista_Tutorias->Nombre_Lenguaje;
+        return view('Tutorias.create', compact('id_lista','Nombre_Lenguaje'));
     }
 
     /**
@@ -141,4 +143,64 @@ class ListaTutoriaController extends Controller
         $lista_Tutorias = $lista_Tutorias->unique('Nombre_Lenguaje');
         return view('Home', compact('lista_Tutorias'));
     }
+
+    public function edit2($ID_Lista_Tutorias)
+    {
+
+        $Lista_Tutorias = DB::table('lista_tutorias')
+        ->Join('usuarios','lista_tutorias.ID_Usuario','=','usuarios.ID_Usuario') 
+        ->where('ID_Lista_Tutorias',$ID_Lista_Tutorias)
+        ->first();
+
+        return view('Lista_Tutorias.edit', compact('Lista_Tutorias'));
+    }
+
+    public function store2(Request $request,$ID_Lista_Tutorias)
+    {
+
+ //return $request->all();
+
+        //  dd($request);
+
+        $campos=[
+            'Nombre_Lenguaje'  => 'max:100'
+            
+        ];
+        
+        $Mensaje=[
+            "Nombre_Lenguaje.max"=>'El campo del nombre de lenguaje no debe superar los 100 caracteres'
+        ];
+
+        $this->validate($request,$campos,$Mensaje);
+
+        $Lista_Tutorias = lista_tutoria::where('ID_Lista_Tutorias',$ID_Lista_Tutorias)->first();
+        $Lista_Tutorias->Nombre_Lenguaje =  $request->input('Nombre_Lenguaje');
+        $Lista_Tutorias->Descripcion =  $request->input('Descripcion');
+        $Lista_Tutorias->ID_Usuario =  $request->input('ID_Usuario');
+        $Lista_Tutorias->Fecha_Creacion =  Carbon::now();
+
+        if($request->input('activo')=='on'){
+            $Lista_Tutorias->Activo = true;
+        }else{
+            $Lista_Tutorias->Activo = false;
+        }
+
+        $Lista_Tutorias->save();
+
+        $lista_Tutorias = DB::table('lista_tutorias') 
+        ->join('usuarios','lista_tutorias.ID_Usuario','=','usuarios.ID_Usuario')
+        ->select(   'lista_tutorias.ID_Lista_Tutorias',
+                    'usuarios.Nombre',
+                    'usuarios.Apellido',
+                    'usuarios.Rut',
+                    'lista_tutorias.Nombre_Lenguaje',
+                    'lista_tutorias.Activo')
+        ->get();
+
+
+        return view('Lista_Tutorias.index', compact('lista_Tutorias'));
+
+    }
+
+
 }
