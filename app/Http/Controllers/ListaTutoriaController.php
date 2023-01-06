@@ -125,7 +125,6 @@ class ListaTutoriaController extends Controller
      */
     public function destroy($ID_Lista_Tutorias)
     {
-        dd($ID_Lista_Tutorias);
         lista_tutoria::where('ID_Lista_Tutorias',$ID_Lista_Tutorias)->delete();
 
         $lista_Tutorias = DB::table('lista_tutorias') 
