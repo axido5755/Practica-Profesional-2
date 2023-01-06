@@ -125,6 +125,7 @@ class ListaTutoriaController extends Controller
      */
     public function destroy($ID_Lista_Tutorias)
     {
+        dd($ID_Lista_Tutorias);
         lista_tutoria::where('ID_Lista_Tutorias',$ID_Lista_Tutorias)->delete();
 
         $lista_Tutorias = DB::table('lista_tutorias') 
@@ -153,8 +154,7 @@ class ListaTutoriaController extends Controller
                     'usuarios.Apellido',
                     'tutorias.Link_video')
         ->get();
-        $lista_Tutorias = $lista_Tutorias->unique('Nombre_Lenguaje');
-        $lista_Tutoria = $lista_Tutorias->unique('Nombre_Lenguaje');
+        $lista_Tutoria = $lista_Tutorias;
         return view('Home', compact('lista_Tutorias','lista_Tutoria'));
     }
 

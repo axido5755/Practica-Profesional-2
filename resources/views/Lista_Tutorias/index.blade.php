@@ -59,37 +59,37 @@
 
                         <td>
                             <a href="{{url('/Lista_Tutorias/edit2/'.$lista_Tutorias->ID_Lista_Tutorias)}}">
-                                <i class="fas fa-edit  fa-lg" ></i>
+                            <input type="button" class="btn btn-block btn-warning" name="btn" value="Editar" id="submitBtn"
+                                data-toggle="modal" class="btn btn-secondary" />
                             </a>
                         </td>
 
                         <td>
-                            <div>
-                                <a name="btn" id="submitBtn" 
-                                data-toggle="modal" data-target="#delete-modal"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                            </div>
-
-                            <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog"
+                        <form class="modal-content" action="{{url('/Lista_Tutorias/'.$lista_Tutorias->ID_Lista_Tutorias)}}" method="post" >
+                            <input type="button" class="btn btn-block btn-danger" name="btn" value="Eliminar" id="submitBtn"
+                                data-toggle="modal" data-target="#id{{$lista_Tutorias->ID_Lista_Tutorias}}" class="btn btn-secondary" />
+                            <div class="modal fade" id="id{{$lista_Tutorias->ID_Lista_Tutorias}}" tabindex="-1" role="dialog"
                                 aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">¿Desea borrar todas las tutorias de {{$lista_Tutorias->Nombre_Lenguaje}}?</h5>
+                                            <h5 class="modal-title">¿Desea borrar el comentario?</h5>
                                         </div>
                                         <div class="modal-body">
-                                            <p>Si elimina el curso estaras borrando todo dentro de el.</p>
+                                            <p>Si borra el comentario no lo podra recuperar.</p>
                                           </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                            <form action="{{url('/Lista_Tutorias/'.$lista_Tutorias->ID_Lista_Tutorias)}}" method="POST" >
+                                           
                                             @csrf
                                             {{method_field('DELETE')}}
-                                            <button type="submit" class="btn btn-primary">Eliminar</button>
-                                            </form>
+                                            <button type="submit" class="btn btn-primary">Aceptar</button>
+                                            
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </form>
                         </td>
 
 

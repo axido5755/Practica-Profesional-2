@@ -26,15 +26,9 @@
 
                 
                 <div class="card-body">
-                    <h3>{{$lista_Tutorias->Nombre_Lenguaje}}</h3>
+                    <h2>Lenguaje: {{$lista_Tutorias->Nombre_Lenguaje}}</h2>
+                    <h6>{{$lista_Tutorias->Nombre}} {{$lista_Tutorias->Apellido}}</h6>
                   <p class="card-text">{{$lista_Tutorias->Descripcion}}</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    </div>
-                    <small class="text-muted">9 mins</small>
-                  </div>
                 </div>
               </div>
             </div>
