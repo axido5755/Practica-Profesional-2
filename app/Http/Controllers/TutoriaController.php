@@ -185,7 +185,9 @@ class TutoriaController extends Controller
         ->where("lista_tutorias.ID_Lista_Tutorias",$ID_Lista_Tutorias) 
         ->first();
 
-        return view('TutoriaPanel.ListaPanel', compact('lista_Tutorias','Lista'));
+        $lista_Tutoria =$lista_Tutorias;
+
+        return view('TutoriaPanel.ListaPanel', compact('lista_Tutorias','Lista','lista_Tutoria'));
     }
 
     public function video($ID_Lista,$ID_Lista_Tutorias){

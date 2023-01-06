@@ -154,7 +154,8 @@ class ListaTutoriaController extends Controller
                     'tutorias.Link_video')
         ->get();
         $lista_Tutorias = $lista_Tutorias->unique('Nombre_Lenguaje');
-        return view('Home', compact('lista_Tutorias'));
+        $lista_Tutoria = $lista_Tutorias->unique('Nombre_Lenguaje');
+        return view('Home', compact('lista_Tutorias','lista_Tutoria'));
     }
 
     public function edit2($ID_Lista_Tutorias)
