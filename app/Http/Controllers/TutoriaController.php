@@ -18,6 +18,18 @@ class TutoriaController extends Controller
      */
     public function index()
     {
+        $lista_Tutorias = DB::table('tutorias')
+        ->rightJoin('lista_tutorias','tutorias.ID_Lista_Tutorias','=','lista_tutorias.ID_Lista_Tutorias')
+        ->leftJoin('usuarios','lista_tutorias.ID_Usuario','=','usuarios.ID_Usuario') 
+        ->select(   'lista_tutorias.ID_Lista_Tutorias',
+                    'lista_tutorias.Nombre_Lenguaje',
+                    'lista_tutorias.Descripcion',
+                    'usuarios.Nombre',
+                    'usuarios.Apellido',
+                    'tutorias.Link_video')
+        ->get();
+        $lista_Tutoria = $lista_Tutorias;
+        return view('Home', compact('lista_Tutorias','lista_Tutoria'));
     }
 
     /**
@@ -75,16 +87,26 @@ class TutoriaController extends Controller
         $Tutoria->save();
 
 
+
+        $ID_Usuario = DB::table('lista_tutorias')
+        ->leftJoin('usuarios','lista_tutorias.ID_Usuario','=','usuarios.ID_Usuario') 
+        ->select('usuarios.ID_Usuario')
+        ->where('lista_tutorias.ID_Lista_Tutorias',$request->input('ID_Lista_Tutorias'))
+        ->first();
+        
+        $ID_Usuario = $ID_Usuario->ID_Usuario;
+
+
         $lista_Tutorias = DB::table('lista_tutorias') 
-        ->join('usuarios','lista_tutorias.ID_Usuario','=','usuarios.ID_Usuario')
+        ->leftJoin('usuarios','lista_tutorias.ID_Usuario','=','usuarios.ID_Usuario')
         ->select(   'lista_tutorias.ID_Lista_Tutorias',
                     'usuarios.Nombre',
                     'usuarios.Apellido',
                     'usuarios.Rut',
                     'lista_tutorias.Nombre_Lenguaje',
                     'lista_tutorias.Activo')
+        ->where('lista_tutorias.ID_Usuario',$ID_Usuario)
         ->get();
-
 
         return view('Lista_Tutorias.index', compact('lista_Tutorias'));
     }
