@@ -228,6 +228,7 @@
             dropdown.disabled = true;
             document.getElementById('username').innerText = "Login";
             document.getElementById('userDropdown').setAttribute('href', '/Login');
+            $("#OcultarUsuarioComun").hide();
         }
         
         function logout(){
