@@ -15,11 +15,18 @@
                 @csrf
 
                 {{-- CALLE--}}
-                <select class="form-select" name="ID_Lista_Tutorias" id="ID_Lista_Tutorias" aria-label="Default select example" require>
+                <select class="form-select" name="ID_Lista_Tutorias" id="ID_Lista_Tutorias"  require>
                     @foreach ($Lista_Tutorias as $Lista_Tutorias)
+                        @if($Lista_Tutorias->ID_Lista_Tutorias==$Tutoria->ID_Lista_Tutorias)
+                        <option 
+                            value="{{$Lista_Tutorias->ID_Lista_Tutorias}}" selected="">{{$Lista_Tutorias->Nombre_Lenguaje}}
+                        </option>
+                        @else
                         <option 
                             value="{{$Lista_Tutorias->ID_Lista_Tutorias}}">{{$Lista_Tutorias->Nombre_Lenguaje}}
-                        </option>                     
+                        </option>
+                        @endif
+                   
                     @endforeach
                 </select>
                 
