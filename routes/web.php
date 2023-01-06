@@ -42,3 +42,5 @@ Route::get('/Tutoria/edit2/{ID_Tutoria}', 'App\Http\Controllers\TutoriaControlle
 Route::put('/Tutoria/store2/{ID_Tutoria}', 'App\Http\Controllers\TutoriaController@store2');
 Route::get('/Lista_Tutorias/edit2/{ID_Tutoria}', 'App\Http\Controllers\ListaTutoriaController@edit2');
 Route::put('/Lista_Tutorias/store2/{ID_Tutoria}', 'App\Http\Controllers\ListaTutoriaController@store2');
+Route::get('/Lista_Tutorias/index2/{ID_Usuario}', 'App\Http\Controllers\ListaTutoriaController@index2');
+

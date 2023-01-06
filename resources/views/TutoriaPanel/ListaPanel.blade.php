@@ -27,7 +27,6 @@
                 
                 <div class="card-body">
                     <h3>Tutoria: {{$lista_Tutorias->Numeracion}}</h3>
-                    <h6>{{$lista_Tutorias->Nombre}} {{$lista_Tutorias->Apellido}}</h6>
                   <p class="card-text">{{$lista_Tutorias->Titulo}}</p>
                 </div>
               </div>

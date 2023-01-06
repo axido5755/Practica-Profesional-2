@@ -54,14 +54,7 @@
                 <span>Inicio</span></a>
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Addons
-            </div>
-
+            <div id="OcultarUsuarioComun">
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
@@ -72,11 +65,12 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Pestaña listado:</h6>
-                        <a class="collapse-item" href="/Lista_Tutorias">Mostrar listado</a>
+                        <a id='Mostrarlistado' class="collapse-item" href="/Lista_Tutorias">Mostrar listado</a>
                         <a id="crearlista" class="collapse-item" href="/Lista_Tutorias/create">Crear un listado</a>
                     </div>
                 </div>
             </li>
+            </div>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
@@ -221,8 +215,14 @@
         
         if(usuarioJson){
             const usuario = JSON.parse(usuarioJson);
+            const rol = usuario.ID_Rol;
             const span = document.getElementById('username');
             span.textContent =`${usuario.Nombre} ${usuario.Apellido}`;
+            document.getElementById('Mostrarlistado').href = "/Lista_Tutorias/index2/"+`${usuario.ID_Usuario}`;
+
+            if (rol == 3) {
+                $("#OcultarUsuarioComun").hide();
+            }
         }else{
             const dropdown = document.getElementById('userDropdown');
             dropdown.disabled = true;

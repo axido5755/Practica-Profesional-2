@@ -216,4 +216,36 @@ class ListaTutoriaController extends Controller
     }
 
 
+    public function index2($ID_Usuario)
+    {
+        $rol = DB::table('usuarios')->where('ID_Usuario',$ID_Usuario)->first();
+        $rol = $rol-> ID_Rol;
+        if ($rol == 1) {
+            $lista_Tutorias = DB::table('lista_tutorias') 
+            ->join('usuarios','lista_tutorias.ID_Usuario','=','usuarios.ID_Usuario')
+            ->select(   'lista_tutorias.ID_Lista_Tutorias',
+                        'usuarios.ID_Usuario',
+                        'usuarios.Nombre',
+                        'usuarios.Apellido',
+                        'usuarios.Rut',
+                        'lista_tutorias.Nombre_Lenguaje',
+                        'lista_tutorias.Activo')
+            ->get();
+        } else {
+            $lista_Tutorias = DB::table('lista_tutorias') 
+            ->join('usuarios','lista_tutorias.ID_Usuario','=','usuarios.ID_Usuario')
+            ->select(   'lista_tutorias.ID_Lista_Tutorias',
+                        'usuarios.ID_Usuario',
+                        'usuarios.Nombre',
+                        'usuarios.Apellido',
+                        'usuarios.Rut',
+                        'lista_tutorias.Nombre_Lenguaje',
+                        'lista_tutorias.Activo')
+            ->where('usuarios.ID_Usuario',$ID_Usuario)
+            ->get();
+        }
+                
+        return view('Lista_Tutorias.index', compact('lista_Tutorias'));
+    }
+
 }
