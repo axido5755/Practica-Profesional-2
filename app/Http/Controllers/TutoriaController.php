@@ -218,8 +218,18 @@ class TutoriaController extends Controller
 
     public function edit2($ID_Tutoria)
     {
+
+        $ID_Usuario = DB::table('tutorias')
+        ->rightJoin('lista_tutorias','tutorias.ID_Lista_Tutorias','=','lista_tutorias.ID_Lista_Tutorias')
+        ->leftJoin('usuarios','lista_tutorias.ID_Usuario','=','usuarios.ID_Usuario') 
+        ->select('usuarios.ID_Usuario')
+        ->where('tutorias.ID_Tutoria',$ID_Tutoria)
+        ->first();
+        
+        $ID_Usuario = $ID_Usuario->ID_Usuario;
+        
         $Tutoria = Tutoria::where('ID_Tutoria',$ID_Tutoria)->first();
-        $Lista_Tutorias = lista_tutoria::all();
+        $Lista_Tutorias = lista_tutoria::where('ID_Usuario',$ID_Usuario)->get();
         return view('Tutorias.edit', compact('Tutoria','Lista_Tutorias','ID_Tutoria'));
     }
 
